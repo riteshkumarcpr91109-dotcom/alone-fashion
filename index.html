@@ -3,328 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALONE FASHION - ऑनलाइन स्टोर</title>
+    <title>ऑनलाइन स्टोर</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * { 
+            box-sizing: border-box; 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+        }
+        body { 
+            background-color: #f4f4f4; 
+            padding-bottom: 40px; 
+        }
+        
+        /* Header Banner Style */
+        .banner { 
+            background-color: #005A43; 
+            color: white; 
+            text-align: center; 
+            padding: 35px 20px; 
+        }
+        .banner h1 { 
+            font-size: 24px; 
+            margin-bottom: 10px; 
+            font-weight: bold;
+        }
+        .banner p { 
+            font-size: 15px; 
+            opacity: 0.9; 
+            line-height: 1.4;
         }
 
-        body {
-            background-color: #f8f9fa;
+        /* Search Bar Style */
+        .search-container { 
+            padding: 20px 15px 10px 15px; 
+            max-width: 500px; 
+            margin: 0 auto; 
+        }
+        .search-box { 
+            width: 100%; 
+            padding: 14px 16px; 
+            font-size: 16px; 
+            border: 2px solid #005A43; 
+            border-radius: 8px; 
+            outline: none; 
+            background-color: #fff;
+        }
+
+        /* Category Filter Buttons Style */
+        .category-buttons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 20px; 
+            flex-wrap: wrap; 
+            padding: 0 15px; 
+        }
+        .btn { 
+            padding: 8px 18px; 
+            border: 1px solid #ccc; 
+            background: #ffffff; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            font-weight: bold;
             color: #333;
-            padding-bottom: 40px;
+            transition: 0.2s;
+        }
+        .btn.active { 
+            background: #005A43; 
+            color: white; 
+            border-color: #005A43;
         }
 
-        /* HEADER */
-        header {
-            background: linear-gradient(135deg, #111827, #1f2937);
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        /* Product Container Style */
+        .products-grid { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            max-width: 500px; 
+            margin: 0 auto; 
+            padding: 0 15px; 
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            color: #f3f4f6;
-            margin-bottom: 0.3rem;
-            text-transform: uppercase;
+        /* Single Product Card Style */
+        .product-card { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
         }
-
-        header p {
-            font-size: 0.95rem;
-            color: #9ca3af;
+        .product-card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            display: block; 
+            background-color: #eee;
         }
-
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .product-info { 
+            padding: 16px; 
         }
-
-        /* PRODUCT GRID */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
+        .product-title { 
+            font-size: 20px; 
+            color: #111; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
         }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #e5e7eb;
+        .product-desc { 
+            font-size: 14px; 
+            color: #555; 
+            margin-bottom: 12px; 
+            line-height: 1.4; 
         }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .product-price { 
+            font-size: 22px; 
+            color: #005A43; 
+            font-weight: bold; 
+            margin-bottom: 14px; 
         }
-
-        .product-image {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            background-color: #f3f4f6;
+        
+        /* WhatsApp Order Button */
+        .wa-btn { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            background-color: #25D366; 
+            color: white; 
+            text-decoration: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 16px;
+            text-align: center; 
         }
-
-        .product-info {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
+        .wa-btn:active {
+            opacity: 0.9;
         }
-
-        .product-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 0.4rem;
-        }
-
-        .product-description {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .product-price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #16a34a;
-            margin-bottom: 1rem;
-        }
-
-        /* WHATSAPP BUTTON */
-        .order-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: #25d366;
-            color: white;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 0.95rem;
-            transition: background-color 0.2s;
-        }
-
-        .order-btn:hover {
-            background-color: #16a34a;
-        }
-
-        .order-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        /* ADMIN PANEL SECTION */
-        .admin-section {
-            margin-top: 3rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-
-        .admin-section h3 {
-            margin-bottom: 1rem;
-            color: #374151;
-            font-size: 1.1rem;
-        }
-
-        .admin-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .admin-form input {
-            padding: 0.6rem 0.8rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            flex: 1;
-            min-width: 180px;
-        }
-
-        .admin-btn {
-            background-color: #374151;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .admin-btn:hover {
-            background-color: #1f2937;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            border-top: 1px solid #e5e7eb;
+        
+        .no-results { 
+            text-align: center; 
+            color: #777; 
+            margin-top: 30px; 
+            font-size: 16px;
+            display: none; 
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <h1>ALONE FASHION</h1>
-        <p>पसंद का कपड़ा चुनें और सीधे WhatsApp पर आसानी से ऑर्डर करें</p>
-    </header>
+    <!-- Header Banner -->
+    <div class="banner">
+        <h1>हमारे ऑनलाइन स्टोर में आपका स्वागत है</h1>
+        <p>अपना पसंदीदा प्रोडक्ट चुनें और सीधे WhatsApp पर ऑर्डर करें</p>
+    </div>
 
-    <div class="container">
+    <!-- Search Box Section -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="प्रोडक्ट खोजें (Search product)..." onkeyup="filterProducts()">
+    </div>
 
-        <!-- PRODUCT LIST -->
-        <div class="product-grid" id="productGrid">
+    <!-- Category Filter Buttons -->
+    <div class="category-buttons">
+        <button class="btn active" onclick="filterCategory('all', event)">सब (All)</button>
+        <button class="btn" onclick="filterCategory('watch', event)">स्मार्टवॉच</button>
+        <button class="btn" onclick="filterCategory('audio', event)">ईयरबड्स</button>
+    </div>
 
-            <!-- प्रोडक्ट 1 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80" alt="T-Shirt" class="product-image">
-                <div class="product-info">
-                    <div>
-                        <div class="product-title">प्रीमियम कॉटन टी-शर्ट (T-Shirt)</div>
-                        <div class="product-description">100% शुद्ध कॉटन, स्टाइलिश और आरामदायक फ़िट।</div>
-                    </div>
-                    <div>
-                        <div class="product-price">₹499</div>
-                        <button class="order-btn" onclick="sendWhatsAppOrder('प्रीमियम कॉटन टी-शर्ट', '499')">
-                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            WhatsApp पर ऑर्डर करें
-                        </button>
-                    </div>
-                </div>
+    <!-- Products List -->
+    <div class="products-grid" id="productsList">
+
+        <!-- Product 1: Smartwatch -->
+        <div class="product-card" data-category="watch">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smartwatch">
+            <div class="product-info">
+                <div class="product-title">स्मार्टवॉच (Smartwatch)</div>
+                <div class="product-desc">बेस्ट क्वालिटी ब्लूटूथ कॉलिंग स्मार्टवॉच, वॉटरप्रूफ और लॉन्ग बैटरी लाइफ।</div>
+                <div class="product-price">₹1,999</div>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Smartwatch%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
+                    WhatsApp पर ऑर्डर करें
+                </a>
             </div>
-
-            <!-- प्रोडक्ट 2 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" alt="Sneakers" class="product-image">
-                <div class="product-info">
-                    <div>
-                        <div class="product-title">स्टाइलिश स्नीकर्स (Shoes)</div>
-                        <div class="product-description">ट्रेंडी लुक्स और आरामदायक सोल के साथ बेहतरीन जूते।</div>
-                    </div>
-                    <div>
-                        <div class="product-price">₹1,299</div>
-                        <button class="order-btn" onclick="sendWhatsAppOrder('स्टाइलिश स्नीकर्स', '1299')">
-                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            WhatsApp पर ऑर्डर करें
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- प्रोडक्ट 3 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80" alt="Jacket" class="product-image">
-                <div class="product-info">
-                    <div>
-                        <div class="product-title">डेनिम जैकेट (Denim Jacket)</div>
-                        <div class="product-description">हाई-क्वालिटी फैब्रिक और ट्रेंडी डिज़ाइन जैकेट।</div>
-                    </div>
-                    <div>
-                        <div class="product-price">₹1,499</div>
-                        <button class="order-btn" onclick="sendWhatsAppOrder('डेनिम जैकेट', '1499')">
-                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            WhatsApp पर ऑर्डर करें
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <!-- ADMIN PANEL SECTION -->
-        <div class="admin-section">
-            <h3>⚙️ एडमिन पैनल (नया सामान जोड़ें)</h3>
-            <div class="admin-form">
-                <input type="text" id="newTitle" placeholder="प्रोडक्ट का नाम">
-                <input type="text" id="newPrice" placeholder="कीमत (₹)">
-                <input type="text" id="newImg" placeholder="इमेज का URL">
-                <button class="admin-btn" onclick="addNewProduct()">प्रोडक्ट जोड़ें</button>
+        <!-- Product 2: Earbuds -->
+        <div class="product-card" data-category="audio">
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" alt="Earbuds">
+            <div class="product-info">
+                <div class="product-title">वायरलेस ईयरबड्स (Earbuds)</div>
+                <div class="product-desc">डीप बेस साउंड, नॉइज़ कैंसिलेशन और 30 घंटे का प्लेबैक टाइम।</div>
+                <div class="product-price">₹1,299</div>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Earbuds%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
+                    WhatsApp पर ऑर्डर करें
+                </a>
+            </div>
+        </div>
+
+        <!-- Product 3: Fitness Band -->
+        <div class="product-card" data-category="watch">
+            <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=500" alt="Fitness Band">
+            <div class="product-info">
+                <div class="product-title">फिटनेस बैंड (Fitness Band)</div>
+                <div class="product-desc">हार्ट रेट मॉनिटर, स्टेप ट्रैकर और HD टच डिस्प्ले।</div>
+                <div class="product-price">₹999</div>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Fitness%20Band%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
+                    WhatsApp पर ऑर्डर करें
+                </a>
             </div>
         </div>
 
     </div>
 
-    <footer>
-        <p>&copy; 2026 ALONE FASHION. सर्वाधिकार सुरक्षित।</p>
-    </footer>
+    <!-- No Products Found Message -->
+    <div id="noResults" class="no-results">कोई प्रोडक्ट नहीं मिला।</div>
 
-    <!-- JAVASCRIPT -->
+    <!-- Search & Filter Logic JavaScript -->
     <script>
-        // आपका WhatsApp नंबर
-        const phoneNumber = "919110969565";
+        let currentCategory = 'all';
 
-        // व्हाट्सएप पर मैसेज भेजने का फंक्शन
-        function sendWhatsAppOrder(productName, productPrice) {
-            const message = `नमस्ते ALONE FASHION!\n\nमैं यह प्रोडक्ट ऑर्डर करना चाहता/चाहती हूँ:\n🛍️ *प्रोडक्ट:* ${productName}\n💰 *कीमत:* ₹${productPrice}\n\nकृपया डिलीवरी प्रक्रिया बताएँ।`;
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-        }
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('product-card');
+            let visibleCount = 0;
 
-        // एडमिन पैनल से नया प्रोडक्ट जोड़ने का फंक्शन
-        function addNewProduct() {
-            const title = document.getElementById('newTitle').value;
-            const price = document.getElementById('newPrice').value;
-            const img = document.getElementById('newImg').value || 'https://via.placeholder.com/300';
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector('.product-title').innerText.toLowerCase();
+                let desc = cards[i].querySelector('.product-desc').innerText.toLowerCase();
+                let category = cards[i].getAttribute('data-category');
 
-            if (!title || !price) {
-                alert('कृपया प्रोडक्ट का नाम और कीमत दर्ज करें!');
-                return;
+                let matchesSearch = title.includes(input) || desc.includes(input);
+                let matchesCategory = (currentCategory === 'all' || category === currentCategory);
+
+                if (matchesSearch && matchesCategory) {
+                    cards[i].style.display = "block";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
 
-            const grid = document.getElementById('productGrid');
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${img}" alt="${title}" class="product-image">
-                <div class="product-info">
-                    <div>
-                        <div class="product-title">${title}</div>
-                        <div class="product-description">न्यू अराइवल प्रोडक्ट।</div>
-                    </div>
-                    <div>
-                        <div class="product-price">₹${price}</div>
-                        <button class="order-btn" onclick="sendWhatsAppOrder('${title}', '${price}')">
-                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                            WhatsApp पर ऑर्डर करें
-                        </button>
-                    </div>
-                </div>
-            `;
-            grid.appendChild(card);
+            document.getElementById('noResults').style.display = visibleCount === 0 ? "block" : "none";
+        }
 
-            // इन्पुट खाली करें
-            document.getElementById('newTitle').value = '';
-            document.getElementById('newPrice').value = '';
-            document.getElementById('newImg').value = '';
-            alert('नया प्रोडक्ट स्टोर में जुड़ गया है!');
+        function filterCategory(category, event) {
+            currentCategory = category;
+            
+            let btns = document.getElementsByClassName('btn');
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('active');
+            }
+            event.target.classList.add('active');
+
+            filterProducts();
         }
     </script>
 </body>
-                        </html>
-    
+    </html>
+                    
