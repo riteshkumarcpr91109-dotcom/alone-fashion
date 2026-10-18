@@ -132,14 +132,5 @@ document.getElementById("cartTotal").textContent="कुल: ₹"+items.reduce((
 }
 function removeCart(i){cart.splice(i,1);save();renderCart();updateCartCount()}
 function checkout(){alert("यह शुरुआती डेमो है। वास्तविक ऑर्डर के लिए सुरक्षित बैकएंड और संपर्क/पेमेंट सिस्टम जोड़ना होगा।")}
-function openAdmin(){document.getElementById("adminPanel").classList.remove("hidden");document.getElementById("adminPanel").scrollIntoView()}
-function adminLogin(){if(document.getElementById("adminName").value==="alone123"){document.getElementById("adminForm").classList.remove("hidden");alert("लॉगिन हो गया।")}else alert("गलत पासवर्ड।")}
-function addProduct(){
-const name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),image=document.getElementById("newImage").value.trim(),cat=document.getElementById("newCategory").value;
-if(!name||price<=0||!image){alert("नाम, सही कीमत और तस्वीर का URL भरें।");return}
-products.push({id:Date.now(),name,price,old:price,category:cat,image});save();renderProducts();alert("प्रोडक्ट जुड़ गया!")
-}
-renderProducts();
-</script>
-</body>
-  </html>
+function openAdmin(){document.getElementById("adminPanel").classList.remove("hidden");document.getElementById("adminPanel").scroll
+  
