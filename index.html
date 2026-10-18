@@ -12,8 +12,8 @@
         .banner p { font-size: 15px; opacity: 0.9; }
         .search-container { padding: 20px 15px 10px 15px; max-width: 500px; margin: 0 auto; }
         .search-box { width: 100%; padding: 14px 16px; font-size: 16px; border: 2px solid #005A43; border-radius: 8px; outline: none; background-color: #fff; }
-        .category-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 15px; }
-        .btn { padding: 8px 18px; border: 1px solid #ccc; background: #ffffff; border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: bold; color: #333; }
+        .category-buttons { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 15px; }
+        .btn { padding: 8px 14px; border: 1px solid #ccc; background: #ffffff; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
         .btn.active { background: #005A43; color: white; border-color: #005A43; }
         .products-grid { display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin: 0 auto; padding: 0 15px; }
         .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -34,18 +34,21 @@
     </div>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="प्रोडक्ट खोजें (Search product)..." onkeyup="filterProducts()">
+        <input type="text" id="searchInput" class="search-box" placeholder="प्रोडक्ट खोजें (जैसे: T-Shirt, Shoes)..." onkeyup="filterProducts()">
     </div>
 
+    <!-- Category Filter Buttons -->
     <div class="category-buttons">
         <button class="btn active" onclick="filterCategory('all', event)">सब (All)</button>
         <button class="btn" onclick="filterCategory('watch', event)">स्मार्टवॉच</button>
         <button class="btn" onclick="filterCategory('audio', event)">ईयरबड्स</button>
+        <button class="btn" onclick="filterCategory('clothing', event)">टी-शर्ट</button>
+        <button class="btn" onclick="filterCategory('shoes', event)">जूते (Shoes)</button>
     </div>
 
     <div class="products-grid" id="productsList">
 
-        <!-- Product 1 -->
+        <!-- Product 1: Smartwatch -->
         <div class="product-card" data-category="watch">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=60" alt="Smartwatch">
             <div class="product-info">
@@ -56,7 +59,7 @@
             </div>
         </div>
 
-        <!-- Product 2 -->
+        <!-- Product 2: Earbuds -->
         <div class="product-card" data-category="audio">
             <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60" alt="Earbuds">
             <div class="product-info">
@@ -64,6 +67,28 @@
                 <div class="product-desc">डीप बेस साउंड, नॉइज़ कैंसिलेशन और 30 घंटे का प्लेबैक टाइम।</div>
                 <div class="product-price">₹1,299</div>
                 <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Earbuds%20ऑर्डर%20करना%20है" class="wa-link wa-btn" target="_blank">WhatsApp पर ऑर्डर करें</a>
+            </div>
+        </div>
+
+        <!-- Product 3: T-Shirt -->
+        <div class="product-card" data-category="clothing">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=60" alt="T-Shirt">
+            <div class="product-info">
+                <div class="product-title">कॉटन टी-शर्ट (T-Shirt)</div>
+                <div class="product-desc">प्योर कॉटन आरामदायक स्टाइलिश टी-शर्ट, सभी साइज में उपलब्ध।</div>
+                <div class="product-price">₹499</div>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20T-Shirt%20ऑर्डर%20करना%20है" class="wa-link wa-btn" target="_blank">WhatsApp पर ऑर्डर करें</a>
+            </div>
+        </div>
+
+        <!-- Product 4: Shoes -->
+        <div class="product-card" data-category="shoes">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=60" alt="Shoes">
+            <div class="product-info">
+                <div class="product-title">रनिंग स्पोर्ट्स जूते (Shoes)</div>
+                <div class="product-desc">हल्के वजन के आरामदायक स्पोर्ट्स शूज, डेली रनिंग और जिम के लिए बेस्ट।</div>
+                <div class="product-price">₹1,499</div>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Shoes%20ऑर्डर%20करना%20है" class="wa-link wa-btn" target="_blank">WhatsApp पर ऑर्डर करें</a>
             </div>
         </div>
 
@@ -101,5 +126,5 @@
         }
     </script>
 </body>
-                    </html>
-                    
+    </html>
+    
