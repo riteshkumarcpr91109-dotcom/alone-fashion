@@ -5,235 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ऑनलाइन स्टोर</title>
     <style>
-        * { 
-            box-sizing: border-box; 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-        }
-        body { 
-            background-color: #f4f4f4; 
-            padding-bottom: 40px; 
-        }
-        
-        /* Header Banner Style */
-        .banner { 
-            background-color: #005A43; 
-            color: white; 
-            text-align: center; 
-            padding: 35px 20px; 
-        }
-        .banner h1 { 
-            font-size: 24px; 
-            margin-bottom: 10px; 
-            font-weight: bold;
-        }
-        .banner p { 
-            font-size: 15px; 
-            opacity: 0.9; 
-            line-height: 1.4;
-        }
-
-        /* Search Bar Style */
-        .search-container { 
-            padding: 20px 15px 10px 15px; 
-            max-width: 500px; 
-            margin: 0 auto; 
-        }
-        .search-box { 
-            width: 100%; 
-            padding: 14px 16px; 
-            font-size: 16px; 
-            border: 2px solid #005A43; 
-            border-radius: 8px; 
-            outline: none; 
-            background-color: #fff;
-        }
-
-        /* Category Filter Buttons Style */
-        .category-buttons { 
-            display: flex; 
-            justify-content: center; 
-            gap: 10px; 
-            margin-bottom: 20px; 
-            flex-wrap: wrap; 
-            padding: 0 15px; 
-        }
-        .btn { 
-            padding: 8px 18px; 
-            border: 1px solid #ccc; 
-            background: #ffffff; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            font-size: 14px; 
-            font-weight: bold;
-            color: #333;
-            transition: 0.2s;
-        }
-        .btn.active { 
-            background: #005A43; 
-            color: white; 
-            border-color: #005A43;
-        }
-
-        /* Product Container Style */
-        .products-grid { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            max-width: 500px; 
-            margin: 0 auto; 
-            padding: 0 15px; 
-        }
-
-        /* Single Product Card Style */
-        .product-card { 
-            background: white; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-        }
-        .product-card img { 
-            width: 100%; 
-            height: 250px; 
-            object-fit: cover; 
-            display: block; 
-            background-color: #eee;
-        }
-        .product-info { 
-            padding: 16px; 
-        }
-        .product-title { 
-            font-size: 20px; 
-            color: #111; 
-            font-weight: bold; 
-            margin-bottom: 8px; 
-        }
-        .product-desc { 
-            font-size: 14px; 
-            color: #555; 
-            margin-bottom: 12px; 
-            line-height: 1.4; 
-        }
-        .product-price { 
-            font-size: 22px; 
-            color: #005A43; 
-            font-weight: bold; 
-            margin-bottom: 14px; 
-        }
-        
-        /* WhatsApp Order Button */
-        .wa-btn { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            background-color: #25D366; 
-            color: white; 
-            text-decoration: none; 
-            padding: 14px; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 16px;
-            text-align: center; 
-        }
-        .wa-btn:active {
-            opacity: 0.9;
-        }
-        
-        .no-results { 
-            text-align: center; 
-            color: #777; 
-            margin-top: 30px; 
-            font-size: 16px;
-            display: none; 
-        }
+        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f4f4f4; padding-bottom: 40px; }
+        .banner { background-color: #005A43; color: white; text-align: center; padding: 35px 20px; }
+        .banner h1 { font-size: 24px; margin-bottom: 10px; font-weight: bold; }
+        .banner p { font-size: 15px; opacity: 0.9; }
+        .search-container { padding: 20px 15px 10px 15px; max-width: 500px; margin: 0 auto; }
+        .search-box { width: 100%; padding: 14px 16px; font-size: 16px; border: 2px solid #005A43; border-radius: 8px; outline: none; background-color: #fff; }
+        .category-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; padding: 0 15px; }
+        .btn { padding: 8px 18px; border: 1px solid #ccc; background: #ffffff; border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: bold; color: #333; }
+        .btn.active { background: #005A43; color: white; border-color: #005A43; }
+        .products-grid { display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin: 0 auto; padding: 0 15px; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .product-card img { width: 100%; height: 240px; object-fit: cover; display: block; background-color: #ddd; }
+        .product-info { padding: 16px; }
+        .product-title { font-size: 20px; color: #111; font-weight: bold; margin-bottom: 8px; }
+        .product-desc { font-size: 14px; color: #555; margin-bottom: 12px; line-height: 1.4; }
+        .product-price { font-size: 22px; color: #005A43; font-weight: bold; margin-bottom: 14px; }
+        .wa-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #25D366; color: white; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 16px; text-align: center; }
+        .no-results { text-align: center; color: #777; margin-top: 30px; font-size: 16px; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- Header Banner -->
     <div class="banner">
         <h1>हमारे ऑनलाइन स्टोर में आपका स्वागत है</h1>
         <p>अपना पसंदीदा प्रोडक्ट चुनें और सीधे WhatsApp पर ऑर्डर करें</p>
     </div>
 
-    <!-- Search Box Section -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-box" placeholder="प्रोडक्ट खोजें (Search product)..." onkeyup="filterProducts()">
     </div>
 
-    <!-- Category Filter Buttons -->
     <div class="category-buttons">
         <button class="btn active" onclick="filterCategory('all', event)">सब (All)</button>
         <button class="btn" onclick="filterCategory('watch', event)">स्मार्टवॉच</button>
         <button class="btn" onclick="filterCategory('audio', event)">ईयरबड्स</button>
     </div>
 
-    <!-- Products List -->
     <div class="products-grid" id="productsList">
 
-        <!-- Product 1: Smartwatch -->
+        <!-- Product 1 -->
         <div class="product-card" data-category="watch">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smartwatch">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=60" alt="Smartwatch">
             <div class="product-info">
                 <div class="product-title">स्मार्टवॉच (Smartwatch)</div>
                 <div class="product-desc">बेस्ट क्वालिटी ब्लूटूथ कॉलिंग स्मार्टवॉच, वॉटरप्रूफ और लॉन्ग बैटरी लाइफ।</div>
                 <div class="product-price">₹1,999</div>
-                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Smartwatch%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
-                    WhatsApp पर ऑर्डर करें
-                </a>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Smartwatch%20ऑर्डर%20करना%20है" class="wa-link wa-btn" target="_blank">WhatsApp पर ऑर्डर करें</a>
             </div>
         </div>
 
-        <!-- Product 2: Earbuds -->
+        <!-- Product 2 -->
         <div class="product-card" data-category="audio">
-            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" alt="Earbuds">
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60" alt="Earbuds">
             <div class="product-info">
                 <div class="product-title">वायरलेस ईयरबड्स (Earbuds)</div>
                 <div class="product-desc">डीप बेस साउंड, नॉइज़ कैंसिलेशन और 30 घंटे का प्लेबैक टाइम।</div>
                 <div class="product-price">₹1,299</div>
-                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Earbuds%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
-                    WhatsApp पर ऑर्डर करें
-                </a>
-            </div>
-        </div>
-
-        <!-- Product 3: Fitness Band -->
-        <div class="product-card" data-category="watch">
-            <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=500" alt="Fitness Band">
-            <div class="product-info">
-                <div class="product-title">फिटनेस बैंड (Fitness Band)</div>
-                <div class="product-desc">हार्ट रेट मॉनिटर, स्टेप ट्रैकर और HD टच डिस्प्ले।</div>
-                <div class="product-price">₹999</div>
-                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Fitness%20Band%20ऑर्डर%20करना%20है" class="wa-btn" target="_blank">
-                    WhatsApp पर ऑर्डर करें
-                </a>
+                <a href="https://wa.me/919110969565?text=नमस्ते,%20मुझे%20Earbuds%20ऑर्डर%20करना%20है" class="wa-link wa-btn" target="_blank">WhatsApp पर ऑर्डर करें</a>
             </div>
         </div>
 
     </div>
 
-    <!-- No Products Found Message -->
     <div id="noResults" class="no-results">कोई प्रोडक्ट नहीं मिला।</div>
 
-    <!-- Search & Filter Logic JavaScript -->
     <script>
         let currentCategory = 'all';
-
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('product-card');
             let visibleCount = 0;
-
             for (let i = 0; i < cards.length; i++) {
                 let title = cards[i].querySelector('.product-title').innerText.toLowerCase();
                 let desc = cards[i].querySelector('.product-desc').innerText.toLowerCase();
                 let category = cards[i].getAttribute('data-category');
-
                 let matchesSearch = title.includes(input) || desc.includes(input);
                 let matchesCategory = (currentCategory === 'all' || category === currentCategory);
-
                 if (matchesSearch && matchesCategory) {
                     cards[i].style.display = "block";
                     visibleCount++;
@@ -241,22 +90,16 @@
                     cards[i].style.display = "none";
                 }
             }
-
             document.getElementById('noResults').style.display = visibleCount === 0 ? "block" : "none";
         }
-
         function filterCategory(category, event) {
             currentCategory = category;
-            
             let btns = document.getElementsByClassName('btn');
-            for (let i = 0; i < btns.length; i++) {
-                btns[i].classList.remove('active');
-            }
+            for (let i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
             event.target.classList.add('active');
-
             filterProducts();
         }
     </script>
 </body>
-    </html>
+                    </html>
                     
