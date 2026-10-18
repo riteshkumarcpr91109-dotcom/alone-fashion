@@ -1,90 +1,213 @@
-वापस जाएँ</button>
-</section>
-<section id="adminPanel" class="panel hidden">
-<h2>Admin Panel — प्रोडक्ट जोड़ें</h2>
-<input id="adminName" placeholder="Admin पासवर्ड">
-<button onclick="adminLogin()">लॉगिन</button>
-<div id="adminForm" class="hidden">
-<input id="newName" placeholder="प्रोडक्ट का नाम">
-<input id="newPrice" type="number" placeholder="कीमत ₹">
-<input id="newImage" placeholder="तस्वीर का URL">
-<select id="newCategory">
-<option>कपड़े</option><option>जूते</option><option>घड़ी</option><option>एक्सेसरी</option>
-</select>
-<button onclick="addProduct()">प्रोडक्ट जोड़ें</button>
-</div>
-</section>
-</main>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ऑनलाइन स्टोर - WhatsApp ऑर्डर</title>
+    <style>
+        /* CSS STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<footer>
-<p>© 2026 ALONE FASHION</p>
-<button onclick="openAdmin()">Admin</button>
-<p>संपर्क: अपनी दुकान का संपर्क विवरण यहाँ जोड़ें।</p>
-</footer>
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
 
-<script>
-const starterProducts=[
-{id:1,name:"कैजुअल टी-शर्ट",price:499,old:799,category:"कपड़े",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"},
-{id:2,name:"स्पोर्ट्स शूज़",price:1199,old:1799,category:"जूते",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"},
-{id:3,name:"क्लासिक घड़ी",price:899,old:1499,category:"घड़ी",image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600"},
-{id:4,name:"स्टाइलिश जैकेट",price:1499,old:2199,category:"कपड़े",image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"},
-{id:5,name:"सनग्लासेस",price:299,old:499,category:"एक्सेसरी",image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600"},
-{id:6,name:"डेनिम जीन्स",price:999,old:1599,category:"कपड़े",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=600"},
-{id:7,name:"रनिंग शूज़",price:1299,old:1999,category:"जूते",image:"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600"},
-{id:8,name:"फैशन बैग",price:799,old:1199,category:"एक्सेसरी",image:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600"}
-];
-let products=JSON.parse(localStorage.getItem("afProducts")||"null")||starterProducts;
-let cart=JSON.parse(localStorage.getItem("afCart")||"[]");
-let category="सभी";
-function save(){localStorage.setItem("afProducts",JSON.stringify(products));localStorage.setItem("afCart",JSON.stringify(cart))}
-function setCategory(c){category=c;renderProducts()}
-function renderProducts(){
-const q=document.getElementById("search").value.toLowerCase();
-const list=products.filter(p=>(category==="सभी"||p.category===category)&&(p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));
-document.getElementById("productCount").textContent=list.length+" प्रोडक्ट";
-document.getElementById("products").innerHTML=list.map(p=>`<article class="card"><img src="${p.image}" alt="${p.name}" onerror="this.src='https://placehold.co/400x300?text=Product'"><div class="info"><h3>${p.name}</h3><span class="price">₹${p.price}</span> <span class="old">₹${p.old||p.price}</span><button onclick="addToCart(${p.id})">कार्ट में डालें</button></div></article>`).join("")||"<p>कोई प्रोडक्ट नहीं मिला।</p>";
-updateCartCount()
-}
-function addToCart(id){cart.push(id);save();updateCartCount();alert("प्रोडक्ट कार्ट में जुड़ गया!")}
-function updateCartCount(){document.getElementById("cartCount").textContent=cart.length}
-function showCart(){document.getElementById("cartPanel").classList.remove("hidden");renderCart();document.getElementById("cartPanel").scrollIntoView()}
-function hideCart(){document.getElementById("cartPanel").classList.add("hidden")}
-function renderCart(){
-const items=cart.map(id=>products.find(p=>p.id===id)).filter(Boolean);
-document.getElementById("cartItems").innerHTML=items.map((p,i)=>`<div class="cart-row">${p.name} — ₹${p.price} <button onclick="removeCart(${i})">हटाएँ</button></div>`).join("")||"कार्ट खाली है।";
-document.getElementById("cartTotal").textContent="कुल: ₹"+items.reduce((s,p)=>s+p.price,0)
-}
-function removeCart(i){cart.splice(i,1);save();renderCart();updateCartCount()} function sendOrderToWhatsApp() {
-    // 1. अपना WhatsApp नंबर यहाँ डालें (Country Code 91 के साथ)
-    var phoneNumber = "919110969565;
+        header {
+            background-color: #075e54;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-    // 2. कार्ट का सामान और कुल कीमत (अपने हिसाब से वैरिएबल सेट करें)
-    var message = "नमस्ते! मुझे आपकी वेबसाइट से ऑर्डर करना है:\n\n";
-    message += "📦 **ऑर्डर विवरण:**\n";
-    
-    // अगर आपके पास कार्ट के आइटम्स हैं तो उन्हें यहाँ जोड़ें
-    // उदाहरण के लिए:
-    message += "- प्रोडक्ट का नाम / कार्ट सामान\n";
-    
-    message += "\nकृपया आगे की प्रक्रिया (Payment & Shipping) बताएँ।";
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
 
-    // 3. WhatsApp लिंक तैयार करना
-    var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
 
-    // 4. ग्राहक को WhatsApp पर भेजना
-    window.open(whatsappURL, '_blank');
-}
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-function openAdmin(){document.getElementById("adminPanel").classList.remove("hidden");document.getElementById("adminPanel").scrollIntoView()}
-function adminLogin(){if(document.getElementById("adminName").value==="alone123"){document.getElementById("adminForm").classList.remove("hidden");alert("लॉगिन हो गया।")}else alert("गलत पासवर्ड।")}
-function addProduct(){
-const name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),image=document.getElementById("newImage").value.trim(),cat=document.getElementById("newCategory").value;
-if(!name||price<=0||!image){alert("नाम, सही कीमत और तस्वीर का URL भरें।");return}
-products.push({id:Date.now(),name,price,old:price,category:cat,image});save();renderProducts();alert("प्रोडक्ट जुड़ गया!")
-}
-renderProducts();
-</script>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #e9ecef;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #25d366;
+            margin-bottom: 1rem;
+        }
+
+        .order-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #128c7e;
+        }
+
+        .order-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #333;
+            color: white;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>हमारे ऑनलाइन स्टोर में आपका स्वागत है</h1>
+        <p>अपना पसंदीदा प्रोडक्ट चुनें और सीधे WhatsApp पर ऑर्डर करें</p>
+    </header>
+
+    <div class="container">
+        <div class="product-grid">
+
+            <!-- प्रोडक्ट 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="स्मार्टवॉच" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">स्मार्टवॉच (Smartwatch)</div>
+                    <div class="product-description">बेस्ट क्वालिटी ब्लूटूथ कॉलिंग स्मार्टवॉच, वॉटरप्रूफ और लॉन्ग बैटरी लाइफ।</div>
+                    <div class="product-price">₹1,999</div>
+                    <button class="order-btn" onclick="sendWhatsAppOrder('स्मार्टवॉच (Smartwatch)', '1999')">
+                        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        WhatsApp पर ऑर्डर करें
+                    </button>
+                </div>
+            </div>
+
+            <!-- प्रोडक्ट 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80" alt="इयरबड्स" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">वायरलेस इयरबड्स (Earbuds)</div>
+                    <div class="product-description">दीप बेस और क्रिस्टल क्लियर साउंड के साथ नॉइज़ कैंसिलेशन इयरबड्स।</div>
+                    <div class="product-price">₹1,299</div>
+                    <button class="order-btn" onclick="sendWhatsAppOrder('वायरलेस इयरबड्स (Earbuds)', '1299')">
+                        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        WhatsApp पर ऑर्डर करें
+                    </button>
+                </div>
+            </div>
+
+            <!-- प्रोडक्ट 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="गेमिंग हेडफ़ोन" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">गेमिंग हेडफ़ोन (Headphones)</div>
+                    <div class="product-description">आरजीबी लाइट और बेहतरीन माइक के साथ अल्ट्रा-कम्फर्ट गेमिंग हेडफ़ोन।</div>
+                    <div class="product-price">₹2,499</div>
+                    <button class="order-btn" onclick="sendWhatsAppOrder('गेमिंग हेडफ़ोन (Headphones)', '2499')">
+                        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        WhatsApp पर ऑर्डर करें
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 आपका स्टोर नाम. सर्वाधिकार सुरक्षित।</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // आपका व्हाट्सएप नंबर
+        const phoneNumber = "919110969565"; 
+
+        function sendWhatsAppOrder(productName, productPrice) {
+            const message = `नमस्ते! मैं आपकी वेबसाइट से यह प्रोडक्ट ऑर्डर करना चाहता/चाहती हूँ:\n\n` +
+                            `🛍️ *प्रोडक्ट:* ${productName}\n` +
+                            `💰 *कीमत:* ₹${productPrice}\n\n` +
+                            `कृपया मुझे आगे की ऑर्डर प्रक्रिया बताएँ।`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
 </body>
-  </html>
-
-
+    </html>
+    
