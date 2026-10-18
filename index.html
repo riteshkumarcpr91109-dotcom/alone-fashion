@@ -130,8 +130,27 @@ const items=cart.map(id=>products.find(p=>p.id===id)).filter(Boolean);
 document.getElementById("cartItems").innerHTML=items.map((p,i)=>`<div class="cart-row">${p.name} — ₹${p.price} <button onclick="removeCart(${i})">हटाएँ</button></div>`).join("")||"कार्ट खाली है।";
 document.getElementById("cartTotal").textContent="कुल: ₹"+items.reduce((s,p)=>s+p.price,0)
 }
-function removeCart(i){cart.splice(i,1);save();renderCart();updateCartCount()}
-function checkout(){alert("यह शुरुआती डेमो है। वास्तविक ऑर्डर के लिए सुरक्षित बैकएंड और संपर्क/पेमेंट सिस्टम जोड़ना होगा।")}
+function removeCart(i){cart.splice(i,1);save();renderCart();updateCartCount()} function sendOrderToWhatsApp() {
+    // 1. अपना WhatsApp नंबर यहाँ डालें (Country Code 91 के साथ)
+    var phoneNumber = "919110969565;
+
+    // 2. कार्ट का सामान और कुल कीमत (अपने हिसाब से वैरिएबल सेट करें)
+    var message = "नमस्ते! मुझे आपकी वेबसाइट से ऑर्डर करना है:\n\n";
+    message += "📦 **ऑर्डर विवरण:**\n";
+    
+    // अगर आपके पास कार्ट के आइटम्स हैं तो उन्हें यहाँ जोड़ें
+    // उदाहरण के लिए:
+    message += "- प्रोडक्ट का नाम / कार्ट सामान\n";
+    
+    message += "\nकृपया आगे की प्रक्रिया (Payment & Shipping) बताएँ।";
+
+    // 3. WhatsApp लिंक तैयार करना
+    var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+
+    // 4. ग्राहक को WhatsApp पर भेजना
+    window.open(whatsappURL, '_blank');
+}
+
 function openAdmin(){document.getElementById("adminPanel").classList.remove("hidden");document.getElementById("adminPanel").scrollIntoView()}
 function adminLogin(){if(document.getElementById("adminName").value==="alone123"){document.getElementById("adminForm").classList.remove("hidden");alert("लॉगिन हो गया।")}else alert("गलत पासवर्ड।")}
 function addProduct(){
